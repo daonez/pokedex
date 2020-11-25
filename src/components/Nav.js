@@ -4,7 +4,13 @@ import { searchByName } from "api/index"
 const Nav = () => {
   return (
     <div>
-      <input type="text" placeholder="Name or Number" />
+      <div>
+        <h1>PokeDex</h1>
+      </div>
+      <div>
+        <input type="text" placeholder="Name or Number" />
+        <button> Search</button>
+      </div>
     </div>
   )
 }
