@@ -1,13 +1,15 @@
 import React, { useEffect } from "react"
 import { getPokemonList, getPokemonInfo } from "api/index"
 
-const PokemonList = ({ setImages, images }) => {
+const PokemonList = ({ list, setList, pokemonImage, setPokemonImage }) => {
   useEffect(() => {
     const firstInit = async () => {
       try {
-        const imageResults = await getPokemonList()
-        console.log(imageResults)
-        setImages(imageResults)
+        const list = await getPokemonList()
+        console.log(list)
+        const images = await getPokemonInfo()
+        setList(list)
+        setPokemonImage(pokemonImage)
       } catch (error) {
         console.log(error)
       }
@@ -17,7 +19,7 @@ const PokemonList = ({ setImages, images }) => {
   }, [])
 
   const handleClick = () => {
-    images.map((index) => {
+    list.map((index) => {
       return getPokemonInfo(index.url)
     })
   }
@@ -26,12 +28,16 @@ const PokemonList = ({ setImages, images }) => {
     <div>
       <button onClick={handleClick}>Hello</button>
       <ul>
-        {images.map((img, id) => {
+        {list.map((img, id) => {
           return (
             <li key={id}>
               <span>{img.id}</span>
               <p>{img.name}</p>
-              <img src={img} alt="" />
+              <div>
+                {pokemonImage.map((img, id) => {
+                  return <img src={img} alt="" />
+                })}
+              </div>
             </li>
           )
         })}

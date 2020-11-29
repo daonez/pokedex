@@ -3,11 +3,17 @@ import Nav from "components/Nav"
 import PokemonList from "components/PokemonList"
 
 function App() {
-  const [images, setImages] = useState([])
+  const [list, setList] = useState([])
+  const [pokemonImage, setPokemonImage] = useState([])
   return (
     <div>
       <Nav />
-      <PokemonList setImages={setImages} images={images} />
+      <PokemonList
+        setList={setList}
+        list={list}
+        pokemonImage={pokemonImage}
+        setPokemonImage={setPokemonImage}
+      />
     </div>
   )
 }
