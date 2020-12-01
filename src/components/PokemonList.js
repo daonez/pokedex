@@ -1,15 +1,15 @@
 import React, { useEffect } from "react"
-import { getPokemonList, getPokemonInfo } from "api/index"
+import { getPokemonList } from "api/index"
+import PokemonCard from "components/PokemonCard"
+import styled from "styled-components"
 
-const PokemonList = ({ list, setList, pokemonImage, setPokemonImage }) => {
+const PokemonList = ({ list, setList }) => {
   useEffect(() => {
     const firstInit = async () => {
       try {
         const list = await getPokemonList()
         console.log(list)
-        const images = await getPokemonInfo()
         setList(list)
-        setPokemonImage(pokemonImage)
       } catch (error) {
         console.log(error)
       }
@@ -18,32 +18,19 @@ const PokemonList = ({ list, setList, pokemonImage, setPokemonImage }) => {
     firstInit()
   }, [])
 
-  const handleClick = () => {
-    list.map((index) => {
-      return getPokemonInfo(index.url)
-    })
-  }
-
   return (
-    <div>
-      <button onClick={handleClick}>Hello</button>
+    <PokemonListContainer>
       <ul>
-        {list.map((img, id) => {
-          return (
-            <li key={id}>
-              <span>{img.id}</span>
-              <p>{img.name}</p>
-              <div>
-                {pokemonImage.map((img, id) => {
-                  return <img src={img} alt="" />
-                })}
-              </div>
-            </li>
-          )
-        })}
+        {list.map((pokemon, id) => (
+          <PokemonCard key={id} pokemon={pokemon} />
+        ))}
       </ul>
-    </div>
+    </PokemonListContainer>
   )
 }
 
 export default PokemonList
+
+const PokemonListContainer = styled.div`
+  display: flex;
+`
