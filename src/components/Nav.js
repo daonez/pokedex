@@ -1,5 +1,4 @@
 import React from "react"
-import { searchByName } from "api/index"
 
 const Nav = () => {
   return (

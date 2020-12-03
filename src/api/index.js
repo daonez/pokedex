@@ -4,7 +4,7 @@ const DEFAULT_URL = "https://pokeapi.co/api/v2/"
 
 export const getPokemonList = async () => {
   try {
-    const res = await axios.get(`${DEFAULT_URL}pokemon?limit=151&offset=0`)
+    const res = await axios.get(`${DEFAULT_URL}pokemon?limit=8&offset=0`)
     const { data } = res
     console.log(data)
     const { results } = data
@@ -15,10 +15,7 @@ export const getPokemonList = async () => {
         url: data.url,
       }
     })
-    // const getUrl = results.map((index) => {
-    //   return getPokemonInfo(index.url)
-    // })
-    // console.log(getUrl)
+
     return pokemonList
   } catch (error) {
     console.log(error)
@@ -31,19 +28,22 @@ export const getPokemonInfo = async (url) => {
     const res = await axios.get(url)
     const { data } = res
 
-    // console.log(data)
     const { abilities, id, types, weight, sprites } = data
-    // const { ...pokemonImages } = sprites.other
-    console.log(sprites)
-    const getpokemonImages = data.map((i) => {
-      return i
+    const pokemonImage = sprites.other["official-artwork"].front_default
+
+    console.log(types)
+
+    const pokemonTypes = types.map((pokemontype) => {
+      return [pokemontype.type.name]
     })
-    console.log(getpokemonImages)
-    // const getPokemonImages = Object.values(pokemonImages)
-    // console.log(getPokemonImages[1])
-    // const images = getPokemonImages[1]
-    // console.log(images)
-    // // return images
+
+    console.log(pokemonTypes)
+
+    return {
+      pokemonImage,
+      id,
+      pokemonTypes,
+    }
   } catch (error) {
     console.log(error)
   }
