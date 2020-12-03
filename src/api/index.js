@@ -2,9 +2,20 @@ import axios from "axios";
 
 const DEFAULT_URL = "https://pokeapi.co/api/v2/";
 
+export const searchPokemon = async (query) => {
+  try {
+    const res = await axios.get(`${DEFAULT_URL}pokemon/${query}`);
+
+    const { data } = res;
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getPokemonList = async () => {
   try {
-    const res = await axios.get(`${DEFAULT_URL}pokemon?limit=8&offset=0`);
+    const res = await axios.get(`${DEFAULT_URL}pokemon?limit=1&offset=0`);
     const { data } = res;
     console.log(data);
     const { results } = data;
@@ -24,7 +35,7 @@ export const getPokemonList = async () => {
 
 export const getPokemonInfo = async (url) => {
   try {
-    console.log(url);
+    // console.log(url)
     const res = await axios.get(url);
     const { data } = res;
 
