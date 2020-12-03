@@ -1,21 +1,18 @@
-import React from "react"
+import React, { useState } from "react"
+import { searchPokemon } from "api/index"
 
-import { searchPokemon } from "api"
+const Nav = () => {
+  const [search, setSearch] = useState("")
 
-const Nav = ({ search, setSearch }) => {
   const handleText = (e) => {
-    setSearch(e.target.value)
     console.log(e.target.value)
+    setSearch(e.target.value)
   }
 
   const handleSearch = async (e) => {
-    try {
-      console.log(e.target.value)
-      const pokemonName = await searchPokemon(e.target.value)
-      setSearch(pokemonName)
-    } catch (error) {
-      console.log(error)
-    }
+    const pokemonName = await searchPokemon(e.target.value)
+    setSearch(search)
+    // console.log(pokemonName);
   }
 
   return (
@@ -24,8 +21,8 @@ const Nav = ({ search, setSearch }) => {
         <h1>PokeDex</h1>
       </div>
       <div>
-        <input type="text" placeholder="Name or Number" onChange={handleText} value={search} />
-        <button type="button" value={search} onClick={handleSearch}>
+        <input type="text" value={search} onChange={handleText} placeholder="Name or Number" />
+        <button onClick={handleSearch} type="button" value={search}>
           Search
         </button>
       </div>
