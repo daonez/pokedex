@@ -4,10 +4,13 @@ import PokemonList from "components/PokemonList"
 
 function App() {
   const [list, setList] = useState([])
+  const [search, setSearch] = useState("")
   return (
     <div>
-      <Nav />
-      <PokemonList setList={setList} list={list} />
+      <Nav search={search} setSearch={setSearch}>
+        <PokemonList setList={setList} list={list} />
+      </Nav>
+      {/* <PokemonList setList={setList} list={list} /> */}
     </div>
   )
 }

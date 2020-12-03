@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const DEFAULT_URL = "https://pokeapi.co/api/v2/"
-
+const POKEMON_NAME = "https://pokeapi.co/api/v2/pokemon/"
 export const getPokemonList = async () => {
   try {
     const res = await axios.get(`${DEFAULT_URL}pokemon?limit=8&offset=0`)
@@ -17,6 +17,16 @@ export const getPokemonList = async () => {
     })
 
     return pokemonList
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const searchPokemon = async (query) => {
+  try {
+    const res = await axios.get(`${POKEMON_NAME}${query}`)
+    const { data } = res
+    console.log(data)
   } catch (error) {
     console.log(error)
   }
