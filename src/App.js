@@ -6,7 +6,7 @@ function App() {
   const [list, setList] = useState([])
   return (
     <div>
-      <Nav></Nav>
+      <Nav setList={setList}></Nav>
       <PokemonList setList={setList} list={list} />
     </div>
   )

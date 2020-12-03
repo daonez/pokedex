@@ -1,7 +1,6 @@
 import React, { useState } from "react"
-import { searchPokemon } from "api/index"
 
-const Nav = () => {
+const Nav = ({ setList }) => {
   const [search, setSearch] = useState("")
 
   const handleText = (e) => {
@@ -10,9 +9,8 @@ const Nav = () => {
   }
 
   const handleSearch = async (e) => {
-    const pokemonName = await searchPokemon(e.target.value)
     setSearch(search)
-    // console.log(pokemonName);
+    setList([{ url: `https://pokeapi.co/api/v2/pokemon/${e.target.value}` }])
   }
 
   return (
