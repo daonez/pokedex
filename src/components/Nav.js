@@ -1,20 +1,17 @@
-import React, { useState } from "react";
-import { searchPokemon } from "api/index";
+import React, { useState } from "react"
 
-
-const Nav = () => {
-  const [search, setSearch] = useState("");
+const Nav = ({ setList }) => {
+  const [search, setSearch] = useState("")
 
   const handleText = (e) => {
-    console.log(e.target.value);
-    setSearch(e.target.value);
-  };
+    console.log(e.target.value)
+    setSearch(e.target.value)
+  }
 
   const handleSearch = async (e) => {
-    const pokemonName = await searchPokemon(e.target.value);
-    setSearch(search);
-    // console.log(pokemonName);
-  };
+    setSearch(search)
+    setList([{ url: `https://pokeapi.co/api/v2/pokemon/${e.target.value}` }])
+  }
 
   return (
     <div>
@@ -28,7 +25,7 @@ const Nav = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

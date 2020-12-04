@@ -8,7 +8,7 @@ const PokemonList = ({ list, setList }) => {
     const firstInit = async () => {
       try {
         const list = await getPokemonList()
-        console.log(list)
+        // console.log(list)
         setList(list)
       } catch (error) {
         console.log(error)
